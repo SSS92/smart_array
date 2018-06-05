@@ -10,7 +10,7 @@ bin/program : $(OBJECTS)
 
 obj/%.o : src/%.cpp 
 	@mkdir -p ./obj
-	@g++ -c $< -I./src -o $@
+	@g++ -c $< -I./src -std=c++11 -o $@
 
 deps/%.dep : src/%.cpp
 	@mkdir -p ./deps
@@ -22,7 +22,7 @@ deps/%.dep : src/%.cpp
 clean :
 	@echo "cleaning up"
 	@rm -rf  deps obj bin docs/doxygen test_results.txt
-	@$(foreach dir,$(TESTS), @$(MAKE) -C $(dir) clean;)
+	#@$(foreach dir,$(TESTS), @$(MAKE) -C $(dir) clean;)
 	
 docs : 
 	@mkdir -p docs/doxygen

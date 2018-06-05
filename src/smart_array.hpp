@@ -1,19 +1,23 @@
+#include <cstddef>
+#ifndef SMART_ARRAY_HPP
+#define SMART_ARRAY_HPP
+
 class Smart_array
 {
     private: 
         int m_size;
-        float* m_array;
-        float default_value = 1.5;
+        int* m_array;
+        int m_default_value;
         
         void init_array (int* array = NULL, unsigned int count = 0);
 
-        bool is_out_of_range (int i);
+        bool is_out_of_range (int i) const;
 
         /**
          * @brief Creates an array and initializes it with default value
          * @param Size of the array
          */
-        float* create_array (unsigned int size);
+        int* create_array (unsigned int size, bool init = true);
 
      public:
         
@@ -25,7 +29,7 @@ class Smart_array
          * @param  already created array is initialized with passed one's elements.
          * @param  count of the given array's elements.
         **/
-        Smart_array (unsigned int size, int* array = NULL, unsigned int count);
+        Smart_array (unsigned int size, int default_value, int* array = NULL, unsigned int count = 0);
         
         /**
          *  @brief Smart_array's copy constructor
@@ -41,24 +45,33 @@ class Smart_array
         /**
          * @brief Returns array's i-th element
          * @param The index of an array element
-        **/
-        int get_element (int i);
+         */
+        int get_element (int i) const;
 
         /**
-         * @brief Changes array's i-th element value to passed one
-         * @param index of array's elements
-         * @param new value
-        **/
-        void set_element (int i, int v);
+         *@brief Changes array's i-th element value to passed one
+         *@param index of array's elements
+         *@param new value
+         */
+        bool set_element (int i, int v);
 
         /**
-         * @brief Creates new array with given size, initializes it, replaces existing array with new one
-         * @param Size of a new array 
+         *@brief Swaps arrays elements by given indexes
+         *@param first index
+         *@param second index
+         */
+        bool swap(int i, int j); 
+        
+        /**
+         *@brief Creates new array with given size, initializes it, replaces existing array with new one
+         *@param Size of a new array 
         **/
-        void resize (int size);
+        bool resize (int size);
          
+        Smart_array & operator = (const Smart_array &s);
+
         /**
-         * @brief Prints the array
+         *@brief Prints the array
          **/ 
         void print ();
         
@@ -66,4 +79,6 @@ class Smart_array
          * @brief Smart_array's destructor, deletes allocated memory 
         **/ 
         ~Smart_array ();
-}
+};
+
+#endif
