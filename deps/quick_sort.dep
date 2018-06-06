@@ -1,0 +1,2 @@
+deps/quick_sort.dep  deps/quick_sort.o: src/quick_sort.cpp \
+ src/smart_array.hpp

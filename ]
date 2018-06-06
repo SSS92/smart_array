@@ -32,10 +32,5 @@ int main ()
      std::cout << std::endl;
      (C[1] = C[2]) = C[3];
      C.print();
-     std::cout << std::endl << std::endl;
-     D.print();
-     std::cout << D;
-     std::cin >> C;
-     std::cout << C;
      return 0;
 } 

@@ -1,0 +1,2 @@
+deps/main.dep  deps/main.o: src/main.cpp src/smart_array.hpp \
+ src/quick_sort.hpp

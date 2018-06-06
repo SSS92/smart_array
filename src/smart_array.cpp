@@ -124,6 +124,7 @@ bool Smart_array::resize (int size)
 }
 
 Smart_array & Smart_array::operator = (const Smart_array &s) {
+    std::cout << "========" << std::endl;
     if (this == &s) { 
         return *this;
     }
@@ -136,9 +137,43 @@ Smart_array & Smart_array::operator = (const Smart_array &s) {
     m_default_value = s.m_default_value;
     delete [] m_array;
     m_array = new_array; 
+    return *this;
 }
 
-void Smart_array::print ()
+int& Smart_array::operator [](int i) {
+    std::cout << "[]" << std::endl; 
+    if (is_out_of_range(i)) {
+        return m_default_value; 
+    }
+    return m_array[i];
+}
+
+int Smart_array::operator [](int i) const {
+    std::cout << "const []" << std::endl; 
+    if (is_out_of_range(i)) {
+        return m_default_value; 
+    } 
+    return m_array[i];
+}
+
+std::ostream& operator << (std::ostream& os, const Smart_array& a) 
+{
+    os << "Smart array size is: " << a.m_size << std::endl << "Contains the following elements: ";
+    a.print();
+    return os;
+}
+
+std::istream& operator >> (std::istream& input, Smart_array& a)
+{
+    int v = 0;
+    std::cin >> v;
+    int ns = a.get_size() + 1;
+    a.resize(ns);
+    a.set_element((ns - 1), v);
+    return input;
+}
+                                                            
+void Smart_array::print () const
 {
     for (int i = 0; i < m_size; ++i) {
         assert((m_array + i));
